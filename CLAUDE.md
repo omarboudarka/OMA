@@ -4,7 +4,7 @@ Turns weekly course uploads into a concept graph, finds the prerequisite a stude
 
 ## Status
 
-Phase 0. The monorepo skeleton (OMA-9), CI (OMA-12) and the local stack (OMA-13) are not built yet, so some `make` targets below may not exist. If one is missing, say so; don't improvise a substitute.
+Phase 0. The monorepo skeleton (OMA-9) exists and every `make` target below runs, but most do little yet: `make dev` starts only the core API (Supabase and the worker come with OMA-13), `make test-int` has no tests until local Postgres exists, and `make eval` has no datasets. CI (OMA-12) isn't built. If a target you need is missing, say so; don't improvise a substitute.
 
 ## Where the spec lives
 
