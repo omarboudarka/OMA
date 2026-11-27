@@ -14,8 +14,9 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
+# Anchored to the repo root: a bare lib/ would also hide apps/web/lib/ (shadcn's utils)
+/lib/
+/lib64/
 parts/
 sdist/
 var/
@@ -221,3 +222,39 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---------------------------------------------------------------
+# Added for this monorepo (Python core + Next.js web app)
+# ---------------------------------------------------------------
+
+# Secrets: every .env variant stays local; only the example is committed
+.env*
+!.env.example
+
+# Node / Next.js / pnpm
+node_modules/
+.next/
+out/
+.turbo/
+.pnpm-store/
+*.tsbuildinfo
+next-env.d.ts
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*
+
+# Supabase local state
+supabase/.branches/
+supabase/.temp/
+
+# Claude Code: personal settings stay local (the shared .claude/settings.json is committed)
+.claude/settings.local.json
+
+# Course material never enters the repo (see README)
+course-material/
+
+# OS and editors
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
