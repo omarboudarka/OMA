@@ -1,0 +1,65 @@
+[project]
+name = "oma-core"
+version = "0.1.0"
+description = "OMA core service: API, pipeline workers and CLI"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi>=0.115",
+    "pydantic>=2.9",
+    "uvicorn[standard]>=0.32",
+]
+
+[dependency-groups]
+dev = [
+    "httpx2>=2.16",
+    "import-linter>=2.1",
+    "mypy>=1.13",
+    "pytest>=8.3",
+    "ruff>=0.8",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/oma_core"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+mypy_path = "src"
+packages = ["oma_core", "tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+markers = ["integration: needs local Postgres (make test-int)"]
+
+[tool.importlinter]
+root_package = "oma_core"
+
+[[tool.importlinter.contracts]]
+name = "Domain stays pure: no adapters, no entrypoints"
+type = "forbidden"
+source_modules = ["oma_core.domain"]
+forbidden_modules = ["oma_core.adapters", "oma_core.entrypoints"]
+
+[[tool.importlinter.contracts]]
+name = "Layers: entrypoints > adapters > application > ports > domain"
+type = "layers"
+layers = [
+    "oma_core.entrypoints",
+    "oma_core.adapters",
+    "oma_core.application",
+    "oma_core.ports",
+    "oma_core.domain",
+]

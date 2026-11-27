@@ -1,0 +1,5 @@
+# Minimum score per stage and metric. A run below its threshold fails.
+# Example:
+# extract_concepts:
+#   recall: 0.85
+{}

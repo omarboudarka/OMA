@@ -1,0 +1,6 @@
+**
+!services/core/pyproject.toml
+!services/core/uv.lock
+!services/core/.python-version
+!services/core/src/**
+**/__pycache__
